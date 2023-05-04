@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 const userRouters=require('./routes/userRouter');//   Router imports
 const studentRouters=require('./routes/studentRoutes');
 const alumniRouters=require('./routes/alumniRoutes');
+const postRouters=require('./routes/postRoutes');
 //Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended:true}));
 app.use("/user",userRouters)
 app.use("/student",studentRouters);
 app.use('/alumni', alumniRouters);
+app.use('/post',postRouters);
 
 
 

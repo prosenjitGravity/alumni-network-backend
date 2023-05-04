@@ -20,18 +20,18 @@ const addUser=async (req,res)=>{
 const updateUser=async (req,res)=>{
     try{
         let user = await User.findByIdAndUpdate(req.param.id,req.body);
-        res.status(200).json({status:1,msg:user});
+        res.status(200).json({status:1,msg:'user'});
     }catch(error){
-        res.status(400).json({status:0,msg:error})
+        res.status(400).json({status:0,msg:'error'})
     }
 }
 
 const deleteUser=async (req,res )=>{
     try{
         let user=await User.findByIdAndDelete(req.param.id);
-        res.status(200).json({status:1,msg:user});
+        res.status(200).json({status:1,msg:'user'});
     }catch(error){
-        res.status(400).json({status:0,msg:error})
+        res.status(400).json({status:0,msg:'error'})
     }
 }
 
