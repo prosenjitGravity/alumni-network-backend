@@ -53,6 +53,18 @@ const alumniTable=mongoose.Schema({
         require:[true,'please provide the companey name'],
         trim:true
     },
+    address:{
+        type:String,
+        trim:true,
+    },
+    cover_image:{
+        type:String ,
+        default:"https://klaxos.com/wp-content/uploads/2017/12/strategy-brain-think-Mastermind.jpg"
+    },
+    profile_image:{
+        type:String,
+        default:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+    },
     password:{
         type:String,
         require:[true,'please provide the password'],
