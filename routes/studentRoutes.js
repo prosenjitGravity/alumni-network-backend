@@ -6,6 +6,7 @@ const {
   logOutStudent,
   studentProfile,
 } = require("../controller/studentController");
+
 const router = express.Router();
 router.post("/register", registerStudent);
 router.post("/login", loginStudent);

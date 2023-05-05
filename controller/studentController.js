@@ -81,7 +81,7 @@ const logOutStudent = (req, res) => {
   res.status(200).json({msg:"logout Succcessfully"})
 }catch(error){
   res.status(400).json({status :0, msg:error})
-}
+ }
 };
 
 const studentProfile= (req,res)=>{

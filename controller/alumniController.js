@@ -49,9 +49,23 @@ const loginAlumni= async (req,res)=>{
     res.status.json({ alumni: alumniExists, token });
 };
 const logOutAlumni = (req, res) => {
-    res.send("Logout");
-    req.logout()
+    try{
+        res.cookie('token',null,{
+            path:'/',
+            httpOnly:true,
+            expires:new Date(0),
+            sameSite:'none',
+            secure:true,
+        })
+        res.status(200).json({msg:'logout successfully'});
+    }
+    catch(error){
+        res.status(400).json({msg:error})
+    }
   };
-  
-  module.exports = { registerAlumni, loginAlumni, logOutAlumni };
+  const alumniProfile=(req,res)=>{
+    console.log(req.alumni)
+    res.status(200).json(req.alumni);
+  }  
+  module.exports = { registerAlumni, loginAlumni, logOutAlumni,alumniProfile };
   
