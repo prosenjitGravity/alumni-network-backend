@@ -62,7 +62,7 @@ const loginStudent = async (req, res) => {
   res.cookie("token", token, {
     path: "/",
     httpOnly: true,
-    expire: new Date(Date.now() + 1000 * 60), // 5 minutes
+    expire: new Date(Date.now() + 1000 * 86400), // 1 day
     sameSite: "none",
     secure: false,
   });
@@ -78,6 +78,7 @@ const logOutStudent = (req, res) => {
     sameSite:'none',
     secure:true,
   })
+  // console.log("the cookie is  : "+res.cookie);
   res.status(200).json({msg:"logout Succcessfully"})
 }catch(error){
   res.status(400).json({status :0, msg:error})
@@ -85,9 +86,8 @@ const logOutStudent = (req, res) => {
 };
 
 const studentProfile= (req,res)=>{
-
   console.log("called")
-  console.log(req.student)
+  console.log("student is :"+req.student)
   res.status(200).json(req.student)
 }
 

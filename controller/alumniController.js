@@ -2,8 +2,8 @@ const Alumni =require("../model/alumniModels");
 const jwt = require("jsonwebtoken");
 
 const generateToken= (id)=>{
-    return jwt.sign({ id },"SecretEncryption",{
-        expiresIn:"id",
+    return jwt.sign({ id },process.env.JWT_SECRET,{
+        expiresIn:"1d",
     });
 } 
 
@@ -30,7 +30,7 @@ const registerAlumni =async (req,res)=>{
 const loginAlumni= async (req,res)=>{
     const {email,password}= req.body;
     if(!email || !password){
-        res.status.json({status:0,msg:"please enter a valid email and password"});
+        res.status().json({status:0,msg:"please enter a valid email and password"});
         return ;
     }
     const alumniExists =await Alumni.findOne({email});
@@ -44,11 +44,12 @@ const loginAlumni= async (req,res)=>{
       httpOnly: true,
       expire: new Date(Date.now() + 1000 * 300), // 5 minutes
       sameSite: "none",
-      secure: true,
+      secure: false,
     });
-    res.status.json({ alumni: alumniExists, token });
+    res.status(200).json({ alumni: alumniExists, token });
 };
 const logOutAlumni = (req, res) => {
+    console.log("logout called....");
     try{
         res.cookie('token',null,{
             path:'/',
@@ -57,13 +58,16 @@ const logOutAlumni = (req, res) => {
             sameSite:'none',
             secure:true,
         })
+        // console.log("the alumni cookie is : "+res.cookie)
         res.status(200).json({msg:'logout successfully'});
     }
     catch(error){
+        console.log(error);
         res.status(400).json({msg:error})
     }
   };
   const alumniProfile=(req,res)=>{
+    console.log('the alumniProfile is called')
     console.log(req.alumni)
     res.status(200).json(req.alumni);
   }  
