@@ -1,10 +1,11 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const cookieParser=require('cookie-parser')
 const cors=require('cors')
+const path = require("path");
 const PORT = 3000;
+const app = express();
 
 app.get("/", (req, res) => {
   console.log(req.url)
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 app.use(cors("*"));
 app.use(cookieParser());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //Routes Middleware
 

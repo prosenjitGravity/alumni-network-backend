@@ -1,13 +1,12 @@
-const mongoose= require('mongoose');
-const postTable= mongoose.Schema({
-    
+const mongoose=require('mongoose');
+const postTable= mongoose.Schema({ 
     userImage:{
         type:String,
         default:''
     },
-        userName:{
+        name:{
         type:String,
-        require:[true,'please provide the userName'],
+        required:[true,'please provide the userName'],
         trim:true
     },
     postDate:{
@@ -16,12 +15,15 @@ const postTable= mongoose.Schema({
     },
     description:{
         type:String,
-        require:[true, "please provide the post description"],
+        required:[true, "please provide the post description"],
     },
     postImage:{
-        data:Buffer,
+        data:String,                                                                                                                
 
-    }
+    },
+    // userId: {
+    //     type: mongoose.Mongoose
+    // }
 });
 const Post =mongoose.model("post",postTable);
 module.exports=Post;

@@ -2,36 +2,36 @@ const mongoose=require('mongoose');
 const userTable=mongoose.Schema({
     name:{
         type:String,
-        require:[true,'please provide the valid user name'],
+        required:[true,'please provide the valid user name'],
         trim:true,
     },
     phone:{
         type:String,
-        require:[true,'please provide the valid phone number'],
+        required:[true,'please provide the valid phone number'],
         unique:true,
     },
     email:{
         type:String,
-        require:[true,'please provide the valid email address'],
+        required:[true,'please provide the valid email address'],
         trim:true,
         unique:true
     },
     degree:{
         type:String,
-        require:[true,'please provide the degree UG or PG'],
+        required:[true,'please provide the degree UG or PG'],
     },
     course:{
         type :String,
-        require:[true,'please provide the course name'],
+        required:[true,'please provide the course name'],
         trim:true
     },
     branch:{
         type:String,
-        require:[true, 'please provide the course branch name'],
+        required:[true, 'please provide the course branch name'],
     },
     admission_year:{
         type:String,
-        require:[true,'please provide the admission year'],
+        required:[true,'please provide the admission year'],
     },
     photo:{
         type:String,

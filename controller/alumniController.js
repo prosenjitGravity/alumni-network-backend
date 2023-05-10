@@ -46,8 +46,19 @@ const loginAlumni= async (req,res)=>{
       sameSite: "none",
       secure: false,
     });
+     console.log(" the res.cookie is  : "+res.cookie)
     res.status(200).json({ alumni: alumniExists, token });
 };
+
+const updateAlumni=async(req,res)=>{
+    try{
+        let alumni=await Alumni.findByIdAndUpdate(req.param.id,req.body);
+        console.log('the alumni is'+alumni)
+        res.status(200).json({status:1,msg:alumni})
+    }catch(error){
+        res.status(400).json({status:0,msg:error})
+    }
+}
 const logOutAlumni = (req, res) => {
     console.log("logout called....");
     try{
@@ -68,8 +79,19 @@ const logOutAlumni = (req, res) => {
   };
   const alumniProfile=(req,res)=>{
     console.log('the alumniProfile is called')
-    console.log(req.alumni)
+    // console.log(req.alumni)
     res.status(200).json(req.alumni);
   }  
-  module.exports = { registerAlumni, loginAlumni, logOutAlumni,alumniProfile };
+  const alumniImage= (req,res)=>{
+    try{
+        let image_info;
+        console.log(req.file)
+        res.status(200).json({status:1,msg:'image upload success'})
+    }catch(error){
+        console.log(error)
+        res.send(400).json({status:0,msg:error})
+    }
+  }
+
+  module.exports = { registerAlumni, loginAlumni, updateAlumni, logOutAlumni, alumniProfile,alumniImage };
   

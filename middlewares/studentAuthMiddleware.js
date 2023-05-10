@@ -3,9 +3,9 @@ const Student = require("../model/studentModels");
 
 const registeredStudent = async (req, res, next) => {
   try {
-    console.log(req.cookie);
+    console.log(req.cookies);
     const token = req.cookies.token;
-    console.log( 'the token is  : '+token);
+    // console.log( 'the token is  : '+token);
     if (!token) {
       res.status(200).json({ status: 0, msg: "student not logged in" });
     }

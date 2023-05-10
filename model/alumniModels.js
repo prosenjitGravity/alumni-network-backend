@@ -3,54 +3,54 @@ const bcrypt=require('bcryptjs');
 const alumniTable=mongoose.Schema({
     first_name:{
         type:String,
-        require:[true,'please provide the first name'],
+        required:[true,'please provide the first name'],
         trim:true,
     },
     last_name:{
         type:String,
-        require:[true,'please provide the last name'],
+        required:[true,'please provide the last name'],
         trim:true
     },
     email:{
         type:String,
-        require:[true,'please provide the email address'],
+        required:[true,'please provide the email address'],
         trim:true,
         unique:true
      },
      phone:{
         type:String,
-        require:[true,'please provide the phone number'],
+        required:[true,'please provide the phone number'],
         trim:true,
         unique:true
      },
      course_type:{
         type:String,
-        require:[true,'please provide the course type UG or PG'],
+        required:[true,'please provide the course type UG or PG'],
         trim:true
     },
     department:{
         type:String,
-        require:[true,'please provide the course department'],
+        required:[true,'please provide the course department'],
         trim:true
     },
     admission_year:{
         type:Number,
-        require:[true,'please provide the admission year'],
+        required:[true,'please provide the admission year'],
         trim:true
     },
     course_end_year:{
         type:Number,
-        require:[true,'please provide the admission year'],
+        required:[true,'please provide the admission year'],
         trim:true
     },
     job_title:{
         type:String,
-        require:[true,'please provide the job title'],
+        required:[true,'please provide the job title'],
         trim:true
     },
     company:{
         type:String,
-        require:[true,'please provide the companey name'],
+        required:[true,'please provide the companey name'],
         trim:true
     },
     address:{
@@ -67,10 +67,44 @@ const alumniTable=mongoose.Schema({
     },
     password:{
         type:String,
-        require:[true,'please provide the password'],
+        required:[true,'please provide the password'],
         trim:true,
         unique:true
-    }
+    },
+    about_me:{
+        type:String,
+        default:''
+    },
+    links:[
+        {
+            type:String,
+            default:'linkedin'
+        },
+        {
+            type:String,
+            default:'github'
+        },
+        {
+            type:String,
+            default:'youtube'
+        },
+        {
+            type:String,
+            default:'website'
+        },
+        {
+            type:String,
+            default:'leetcode'
+        },
+        {
+            type:String,
+            default:'hackerrank'
+        },
+        {
+            type:String,
+            default:'codeforces'
+        },
+    ]
 });
 alumniTable.pre('save',async function(next){
     if(!this.isModified('password')){
