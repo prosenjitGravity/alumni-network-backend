@@ -24,20 +24,22 @@ app.use(express.urlencoded({ extended:true}));
 app.use(cors("*"));
 app.use(cookieParser());
 // console.log("directory is  : "+__dirname);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 
 //Routes Middleware
 
-app.use("/user",userRouters)
+app.use("/user",userRouters);
 app.use("/student",studentRouters);
 app.use('/alumni', alumniRouters);
 app.use('/post',postRouters);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
+    console.log('MongoDB server is connected. Ready to use')
     app.listen(PORT, () => {
       console.log(`The server is running on port ${PORT}`);
     });

@@ -100,10 +100,10 @@ const alumniProfile = (req, res) => {
   res.status(200).json(req.alumni);
 };
 const alumniImage = (req, res) => {
-    console.log(req);
+    // console.log(req);
     // console.log(req.file.fileName);
   try {
-    console.log("the image file is  : "+req.file);
+    console.log("the image file is  : ",req.file);
     let imgInfo;
       imgInfo = {
         fileName: req.file.originalname,

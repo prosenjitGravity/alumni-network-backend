@@ -16,7 +16,7 @@ router.post("/login", loginAlumni);
 router.put("/:id",updateAlumni);
 router.post("/logout", logOutAlumni);
 router.get('/profile',registeredAlumni,alumniProfile)
-router.post("/upload",upload.single("image") , alumniImage);
+router.post("/upload", upload.single("image"), alumniImage);
 
 
 module.exports = router;
