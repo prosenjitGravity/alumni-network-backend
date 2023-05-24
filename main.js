@@ -13,14 +13,14 @@ app.get("/", (req, res) => {
 });
 
 
-const userRouters=require('./routes/userRouter');//   Router imports
+const userRouters=require('./routes/userRouter');
 const studentRouters=require('./routes/studentRoutes');
 const alumniRouters=require('./routes/alumniRoutes');
 const postRouters=require('./routes/postRoutes');
 const { log } = require("console");
 //Middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended:true}));
+app.use(express.urlencoded({ extended:false}));
 app.use(cors("*"));
 app.use(cookieParser());
 // console.log("directory is  : "+__dirname);
@@ -40,6 +40,10 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log('MongoDB server is connected. Ready to use')
+
+
+    +
+    
     app.listen(PORT, () => {
       console.log(`The server is running on port ${PORT}`);
     });

@@ -23,34 +23,35 @@ const alumniTable=mongoose.Schema({
         trim:true,
         unique:true
      },
+     role:{
+        type:String,
+        required:[true,'please provides the user role'],
+        enum:['student','alumni'],
+        default:''
+     },
      course_type:{
         type:String,
-        required:[true,'please provide the course type UG or PG'],
         trim:true
     },
     department:{
         type:String,
-        required:[true,'please provide the course department'],
         trim:true
     },
     admission_year:{
         type:Number,
-        required:[true,'please provide the admission year'],
+
         trim:true
     },
     course_end_year:{
         type:Number,
-        required:[true,'please provide the admission year'],
         trim:true
     },
     job_title:{
         type:String,
-        required:[true,'please provide the job title'],
         trim:true
     },
     company:{
         type:String,
-        required:[true,'please provide the companey name'],
         trim:true
     },
     address:{
@@ -117,3 +118,9 @@ alumniTable.pre('save',async function(next){
 })
 const Alumni=mongoose.model('Alumni',alumniTable);
 module.exports=Alumni;
+
+
+
+
+
+

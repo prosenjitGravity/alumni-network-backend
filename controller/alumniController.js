@@ -6,6 +6,41 @@ const generateToken = (id) => {
     expiresIn: "1d",
   });
 };
+const getAlumni=async (req,res)=>{
+  try{
+    const alumni=await Alumni.find();
+    res.status(200).json({status:1,msg:alumni})
+  }catch(error){
+    console.log("getAlumni error"+error);
+    res.status(400).json({status:0,msg:error});
+  }
+}
+const getWithToken=async(req,res)=>{
+  const token = req.headers.authorization ||req.query.token;
+  console.log("token : ",token);
+  if (!token) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: 'Failed to authenticate token' });
+    }
+    const userId = decoded;
+    console.log('user_id : ',userId.id)
+    Alumni.findById(userId.id)
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({status :0, error: 'User not found' });
+      }
+
+      // Return the user data in the response
+      res.json({status:1,msg:user});
+    })
+    .catch(error => {
+      res.status(500).json({ error: 'An error occurred while fetching the user' });
+    });
+});
+}
 
 const registerAlumni = async (req, res) => {
   const {
@@ -43,7 +78,7 @@ const loginAlumni = async (req, res) => {
   if (!email || !password) {
     res
       .status()
-      .json({ status: 0, msg: "please enter a valid email and password" });
+      .json({ status: 0, msg: "please enter a valid email and password",email });
     return;
   }
   const alumniExists = await Alumni.findOne({ email });
@@ -64,7 +99,7 @@ const loginAlumni = async (req, res) => {
     sameSite: "none",
     secure: false,
   });
-  console.log(" the res.cookie is  : " + res.cookie);
+  // console.log(" the res.cookie is  : " + res.cookie);
   res.status(200).json({ alumni: alumniExists, token });
 };
 
@@ -119,10 +154,12 @@ const alumniImage = (req, res) => {
 };
 
 module.exports = {
+  getAlumni,
   registerAlumni,
   loginAlumni,
   updateAlumni,
   logOutAlumni,
   alumniProfile,
   alumniImage,
+  getWithToken
 };

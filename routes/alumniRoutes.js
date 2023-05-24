@@ -1,16 +1,20 @@
 const express = require("express");
 const {
+  getAlumni,
   registerAlumni,
   loginAlumni,
   logOutAlumni,
   alumniProfile,
   updateAlumni,
-  alumniImage
+  alumniImage,
+  getWithToken
 } = require("../controller/alumniController");
 const registeredAlumni = require("../middlewares/alumniAuthMiddleware");
 const {upload}=require("../utils/fileUpload");
 
 const router = express.Router();
+router.get("/",getAlumni);
+router.get("/my-profile",getWithToken);
 router.post("/register", registerAlumni);
 router.post("/login", loginAlumni);
 router.put("/:id",updateAlumni);

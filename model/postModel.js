@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const Alumni=require('./alumniModels');
 const postTable= mongoose.Schema({ 
     userImage:{
         type:String,
@@ -21,9 +22,10 @@ const postTable= mongoose.Schema({
         data:String,                                                                                                                
 
     },
-    // userId: {
-    //     type: mongoose.Mongoose
-    // }
+    userId: {
+        type: mongoose.Types.ObjectId,
+        ref:Alumni
+    }
 });
 const Post =mongoose.model("post",postTable);
 module.exports=Post;
