@@ -29,21 +29,17 @@ const alumniTable=mongoose.Schema({
         enum:['student','alumni'],
         default:''
      },
-     course_type:{
-        type:String,
-        trim:true
-    },
     department:{
         type:String,
         trim:true
     },
     admission_year:{
-        type:Number,
+        type:String,
 
         trim:true
     },
     course_end_year:{
-        type:Number,
+        type:String,
         trim:true
     },
     job_title:{
